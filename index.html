@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Portfolio — Sichard Lommé</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:    #0D1B2A;
+      --teal:    #1A6B72;
+      --seafoam: #2EC4B6;
+      --cream:   #F4F7F6;
+      --white:   #FFFFFF;
+      --muted:   #6B8A8D;
+      --accent:  #F5A623;
+      --border:  #D4E4E6;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Space Grotesk', sans-serif; background: var(--cream); color: var(--navy); line-height: 1.6; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 60px;
+    }
+    nav .logo { font-weight: 700; font-size: 1rem; color: var(--seafoam); letter-spacing: 0.05em; text-transform: uppercase; }
+    nav ul { list-style: none; display: flex; gap: 1.5rem; }
+    nav ul li a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+    nav ul li a:hover { color: var(--seafoam); }
+
+    .hero-wrap { background: var(--navy); }
+    .hero {
+      max-width: 1100px; margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+      display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center;
+    }
+    .hero-tag { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--seafoam); margin-bottom: 1rem; }
+    .hero h1 { font-family: 'Lora', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 600; line-height: 1.15; color: #fff; margin-bottom: 0.5rem; }
+    .hero h1 span { color: var(--seafoam); }
+    .hero-role { font-size: 1rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    .hero-subtitle { font-size: 1rem; color: rgba(255,255,255,0.65); max-width: 520px; margin-bottom: 2rem; line-height: 1.7; }
+    .hero-badges { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .badge { background: rgba(46,196,182,0.15); border: 1px solid rgba(46,196,182,0.3); color: var(--seafoam); padding: 0.35rem 0.9rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
+    .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero-link { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1.1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: opacity 0.2s; }
+    .hero-link:hover { opacity: 0.85; }
+    .hero-link.gh { background: var(--seafoam); color: var(--navy); }
+    .hero-link.web { background: transparent; border: 1px solid rgba(46,196,182,0.5); color: var(--seafoam); }
+    .hero-avatar {
+      width: 150px; height: 150px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal), var(--seafoam));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem; flex-shrink: 0;
+      border: 3px solid rgba(46,196,182,0.4);
+    }
+
+    .section { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
+    .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.5rem; }
+    .section-title { font-family: 'Lora', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 600; margin-bottom: 0.5rem; }
+    .section-lead { color: var(--muted); font-size: 1rem; max-width: 620px; margin-bottom: 2.5rem; }
+    hr.divider { border: none; border-top: 2px solid var(--border); margin: 0 2rem; }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .about-card { background: var(--white); border-radius: 12px; padding: 1.75rem; border: 1px solid var(--border); }
+    .about-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 1rem; color: var(--teal); text-transform: uppercase; letter-spacing: 0.05em; }
+    .info-row { display: flex; gap: 0.6rem; align-items: flex-start; margin-bottom: 0.6rem; font-size: 0.9rem; color: #3D5560; }
+    .info-icon { flex-shrink: 0; }
+    .info-row a { color: var(--teal); text-decoration: none; }
+    .info-row a:hover { text-decoration: underline; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag { background: var(--cream); border: 1px solid var(--border); color: #3D5560; padding: 0.25rem 0.65rem; border-radius: 6px; font-size: 0.8rem; }
+    .tag.accent { background: rgba(26,107,114,0.1); border-color: rgba(26,107,114,0.25); color: var(--teal); }
+    .lang-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.6rem; }
+    .lang-name { font-size: 0.9rem; font-weight: 600; min-width: 110px; }
+    .lang-bar-bg { flex: 1; height: 6px; background: var(--border); border-radius: 3px; }
+    .lang-bar { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--teal), var(--seafoam)); }
+    .lang-level { font-size: 0.78rem; color: var(--muted); min-width: 30px; text-align: right; }
+
+    /* COMPETENCES */
+    .comp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem; }
+    .comp-card { background: var(--white); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; }
+    .comp-header { padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 1rem; }
+    .comp-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .comp-card h3 { font-size: 0.95rem; font-weight: 600; }
+    .comp-card .comp-level { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+    .progress-bar-wrap { height: 4px; background: var(--border); border-radius: 2px; margin: 0 1.5rem; }
+    .progress-bar { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--teal), var(--seafoam)); }
+    .comp-body { padding: 0.75rem 1.5rem 1.25rem; }
+    .comp-body ul { list-style: none; padding: 0; }
+    .comp-body ul li { font-size: 0.83rem; color: #3D5560; padding: 0.3rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 0.5rem; }
+    .comp-body ul li:last-child { border-bottom: none; }
+    .comp-body ul li::before { content: "→"; color: var(--seafoam); flex-shrink: 0; }
+
+    /* EXPERIENCE */
+    .xp-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .xp-card { background: var(--white); border-radius: 12px; border: 1px solid var(--border); padding: 1.5rem 1.75rem; display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; }
+    .xp-dot-col { display: flex; flex-direction: column; align-items: center; }
+    .xp-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--seafoam); flex-shrink: 0; margin-top: 0.35rem; }
+    .xp-line { flex: 1; width: 2px; background: var(--border); margin-top: 6px; }
+    .xp-date { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--seafoam); margin-bottom: 0.25rem; }
+    .xp-company { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .xp-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .xp-card ul { padding-left: 1.1rem; margin-top: 0.6rem; }
+    .xp-card ul li { font-size: 0.87rem; color: #3D5560; line-height: 1.65; margin-bottom: 0.2rem; }
+
+    /* FORMATIONS */
+    .formation-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+    .formation-card { background: var(--white); border-radius: 12px; border: 1px solid var(--border); padding: 1.5rem; }
+    .formation-card .f-year { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--seafoam); margin-bottom: 0.5rem; }
+    .formation-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .formation-card p { font-size: 0.85rem; color: var(--muted); }
+
+    /* SAE */
+    .sae-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .sae-card { background: var(--white); border-radius: 12px; border: 1px solid var(--border); display: grid; grid-template-columns: auto 1fr; overflow: hidden; }
+    .sae-sidebar { background: var(--teal); color: var(--white); writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); padding: 1.5rem 0.9rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; display: flex; align-items: center; justify-content: center; }
+    .sae-content { padding: 1.5rem 1.75rem; }
+    .sae-meta { display: flex; gap: 1rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+    .sae-tag { font-size: 0.72rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .sae-tag.semester { background: #E8F4F5; color: var(--teal); }
+    .sae-tag.done { background: #E8F5E9; color: #2E7D32; }
+    .sae-content h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .sae-content p { font-size: 0.9rem; color: #3D5560; margin-bottom: 1rem; line-height: 1.65; }
+    .sae-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+    .sae-box { background: var(--cream); border-radius: 8px; padding: 0.75rem 1rem; }
+    .sae-box h4 { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.4rem; }
+    .sae-box p { font-size: 0.82rem; color: var(--navy); margin: 0; }
+    .comp-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
+    .comp-pill { font-size: 0.73rem; padding: 0.2rem 0.6rem; background: rgba(26,107,114,0.1); color: var(--teal); border-radius: 20px; font-weight: 500; }
+    .proof-zone { margin-top: 1rem; border: 2px dashed var(--border); border-radius: 8px; padding: 1rem 1.25rem; font-size: 0.83rem; color: var(--muted); display: flex; gap: 0.5rem; align-items: center; }
+    .proof-link { color: var(--teal); text-decoration: none; font-weight: 600; }
+    .proof-link:hover { text-decoration: underline; }
+
+    /* JOURNAL */
+    .journal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .journal-entry { background: var(--white); border-radius: 12px; border: 1px solid var(--border); padding: 1.5rem; }
+    .journal-date { font-size: 0.73rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--seafoam); margin-bottom: 0.5rem; }
+    .journal-entry h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .journal-entry p { font-size: 0.87rem; color: #3D5560; line-height: 1.65; }
+    .journal-entry .difficulty { margin-top: 0.75rem; padding: 0.6rem 0.9rem; background: #FEF3DC; border-radius: 6px; font-size: 0.82rem; color: #9A6800; }
+    .journal-entry .solution { margin-top: 0.5rem; padding: 0.6rem 0.9rem; background: #E8F4F5; border-radius: 6px; font-size: 0.82rem; color: var(--teal); }
+
+    /* REFLEXION */
+    .reflexion-block { background: var(--navy); color: var(--white); border-radius: 16px; padding: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .reflexion-block h3 { font-family: 'Lora', serif; font-size: 1.2rem; margin-bottom: 1rem; color: var(--seafoam); }
+    .reflexion-block p { font-size: 0.9rem; line-height: 1.75; color: rgba(255,255,255,0.75); margin-bottom: 0.75rem; }
+    .reflexion-block ul { padding-left: 1.2rem; font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.9; }
+    .quote-block { border-left: 3px solid var(--seafoam); padding-left: 1.25rem; margin: 1.25rem 0; font-style: italic; color: rgba(255,255,255,0.65); font-family: 'Lora', serif; font-size: 0.95rem; }
+
+    /* EVAL */
+    .eval-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); font-size: 0.85rem; }
+    .eval-table thead { background: var(--teal); color: var(--white); }
+    .eval-table thead th { padding: 0.9rem 1rem; text-align: left; font-weight: 600; font-size: 0.8rem; }
+    .eval-table tbody tr:nth-child(even) { background: var(--cream); }
+    .eval-table tbody td { padding: 0.9rem 1rem; border-bottom: 1px solid var(--border); color: #3D5560; vertical-align: top; }
+    .eval-table tbody td:first-child { font-weight: 600; color: var(--navy); }
+    .level-1 { color: #C0392B; }
+    .level-2 { color: #E67E22; }
+    .level-3 { color: #27AE60; }
+    .level-4 { color: var(--teal); font-weight: 600; }
+
+    footer { background: var(--navy); color: rgba(255,255,255,0.5); text-align: center; padding: 2rem; font-size: 0.82rem; }
+    footer a { color: var(--seafoam); text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-avatar { display: none; }
+      .about-grid, .journal-grid, .sae-grid, .reflexion-block, .xp-card { grid-template-columns: 1fr; }
+      .sae-card { grid-template-columns: 1fr; }
+      .sae-sidebar { writing-mode: horizontal-tb; transform: none; padding: 0.6rem 1.5rem; }
+      nav ul { gap: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Sichard Lommé · Portfolio</div>
+  <ul>
+    <li><a href="#apropos">Profil</a></li>
+    <li><a href="#competences">Compétences</a></li>
+    <li><a href="#experience">Expériences</a></li>
+    <li><a href="#sae">SAÉ</a></li>
+    <li><a href="#journal">Journal</a></li>
+    <li><a href="#reflexion">Réflexion</a></li>
+  </ul>
+</nav>
+
+<div class="hero-wrap">
+  <div class="hero">
+    <div>
+      <div class="hero-tag">E-Portfolio · BUT Réseaux &amp; Télécommunications — IUT Colmar</div>
+      <h1>Sichard <span>Lommé</span></h1>
+      <div class="hero-role">Technicien Systèmes Numériques</div>
+      <p class="hero-subtitle">Actuellement en BUT R&T à l'Université de Haute Alsace, je suis passionné par les réseaux, la cybersécurité et les systèmes numériques. Je souhaite m'engager dans l'Armée de l'Air et de l'Espace.</p>
+      <div class="hero-badges">
+        <span class="badge">BUT R&T — 1ère année</span>
+        <span class="badge">UHA IUT Colmar</span>
+        <span class="badge">BTS SN option IR</span>
+        <span class="badge">Depuis sept. 2025</span>
+      </div>
+      <div class="hero-links">
+        <a href="https://github.com/0PPA-art" target="_blank" class="hero-link gh">⌥ GitHub · 0PPA-art</a>
+        <a href="https://0ppa-art.github.io/SAE_104/index.html" target="_blank" class="hero-link web">🌐 Site Web · SAE_104</a>
+      </div>
+    </div>
+    <div class="hero-avatar">👨‍💻</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- À PROPOS -->
+<section id="apropos" class="section">
+  <div class="section-label">Présentation</div>
+  <h2 class="section-title">Mon profil</h2>
+  <p class="section-lead">Toutes les informations de contact, atouts et compétences linguistiques.</p>
+
+  <div class="about-grid">
+    <div class="about-card">
+      <h3>📋 Coordonnées</h3>
+      <div class="info-row"><span class="info-icon">📱</span><span>+33 (0)7 71 13 47 74</span></div>
+      <div class="info-row"><span class="info-icon">✉️</span><span>sichardlomme@gmail.com</span></div>
+      <div class="info-row"><span class="info-icon">✉️</span><span>lomme.sichard@uha.fr</span></div>
+      <div class="info-row"><span class="info-icon">📍</span><span>5 Rue Du Cygne, 68100 Mulhouse</span></div>
+      <div class="info-row"><span class="info-icon">⌥</span><a href="https://github.com/0PPA-art" target="_blank">github.com/0PPA-art</a></div>
+      <div class="info-row"><span class="info-icon">🌐</span><a href="https://0ppa-art.github.io/SAE_104/index.html" target="_blank">0ppa-art.github.io/SAE_104</a></div>
+    </div>
+
+    <div class="about-card">
+      <h3>🌍 Langues</h3>
+      <div class="lang-row">
+        <span class="lang-name">Français</span>
+        <div class="lang-bar-bg"><div class="lang-bar" style="width:100%"></div></div>
+        <span class="lang-level">Natif</span>
+      </div>
+      <div class="lang-row">
+        <span class="lang-name">Tchétchène</span>
+        <div class="lang-bar-bg"><div class="lang-bar" style="width:100%"></div></div>
+        <span class="lang-level">Natif</span>
+      </div>
+      <div class="lang-row">
+        <span class="lang-name">Anglais</span>
+        <div class="lang-bar-bg"><div class="lang-bar" style="width:75%"></div></div>
+        <span class="lang-level">B2</span>
+      </div>
+      <div class="lang-row">
+        <span class="lang-name">Allemand</span>
+        <div class="lang-bar-bg"><div class="lang-bar" style="width:55%"></div></div>
+        <span class="lang-level">B1</span>
+      </div>
+    </div>
+
+    <div class="about-card">
+      <h3>⚡ Atouts personnels</h3>
+      <div class="tag-list">
+        <span class="tag accent">Rigoureux</span>
+        <span class="tag accent">Organisé</span>
+        <span class="tag accent">Passionné</span>
+        <span class="tag accent">Relationnel</span>
+        <span class="tag accent">Autonome</span>
+      </div>
+      <div style="margin-top:1.25rem">
+        <h3 style="margin-bottom:0.75rem">🎯 Centres d'intérêt</h3>
+        <div class="tag-list">
+          <span class="tag">♟️ Les Échecs</span>
+          <span class="tag">🎮 Conception de jeux vidéo</span>
+          <span class="tag">🥋 Arts martiaux</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-card">
+      <h3>💻 Compétences informatiques</h3>
+      <div style="margin-bottom:0.75rem">
+        <div style="font-size:0.78rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:0.4rem">Langages</div>
+        <div class="tag-list"><span class="tag">C / C++ / C#</span><span class="tag">HTML/CSS</span><span class="tag">Python</span><span class="tag">PHP</span><span class="tag">JavaScript</span><span class="tag">SQL</span></div>
+      </div>
+      <div style="margin-bottom:0.75rem">
+        <div style="font-size:0.78rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:0.4rem">Réseaux</div>
+        <div class="tag-list"><span class="tag">Cisco Switch / Router</span><span class="tag">Packet Tracer</span><span class="tag">Maquette réseau</span></div>
+      </div>
+      <div style="margin-bottom:0.75rem">
+        <div style="font-size:0.78rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:0.4rem">Systèmes & Outils</div>
+        <div class="tag-list"><span class="tag">Linux</span><span class="tag">Windows XP→11</span><span class="tag">Windows Server 2017/18</span><span class="tag">VMware</span><span class="tag">VirtualBox</span><span class="tag">VS Code</span><span class="tag">PyCharm</span><span class="tag">WampServer</span><span class="tag">Git</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- COMPÉTENCES BUT -->
+<section id="competences" class="section">
+  <div class="section-label">Référentiel BUT R&T</div>
+  <h2 class="section-title">Compétences du tronc commun</h2>
+  <p class="section-lead">Les trois compétences du référentiel BUT R&T, avec les apprentissages critiques visés en BUT 1.</p>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-header">
+        <div class="comp-icon" style="background:#E8F4F5;">🖧</div>
+        <div>
+          <h3>Administrer les réseaux et l'Internet</h3>
+          <div class="comp-level">Compétence 1 — BUT 1 : Assister l'administrateur réseau</div>
+        </div>
+      </div>
+      <div class="progress-bar-wrap"><div class="progress-bar" style="width:55%"></div></div>
+      <div class="comp-body">
+        <ul>
+          <li>AC11.01 — Lois fondamentales de l'électricité / équipements</li>
+          <li>AC11.02 — Architecture systèmes numériques et communications</li>
+          <li>AC11.03 — Configurer les fonctions de base du réseau local</li>
+          <li>AC11.04 — Rôles et principes des systèmes d'exploitation</li>
+          <li>AC11.05 — Identifier et signaler les dysfonctionnements</li>
+          <li>AC11.06 — Installer un poste client et expliquer la procédure</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-header">
+        <div class="comp-icon" style="background:#FEF3DC;">📡</div>
+        <div>
+          <h3>Connecter les entreprises et les usagers</h3>
+          <div class="comp-level">Compétence 2 — BUT 1 : Découvrir les transmissions et la ToIP</div>
+        </div>
+      </div>
+      <div class="progress-bar-wrap"><div class="progress-bar" style="width:35%"></div></div>
+      <div class="comp-body">
+        <ul>
+          <li>AC12.01 — Mesurer, analyser et commenter les signaux</li>
+          <li>AC12.02 — Caractériser des systèmes de transmissions</li>
+          <li>AC12.03 — Déployer des supports de transmission</li>
+          <li>AC12.04 — Connecter les systèmes de ToIP</li>
+          <li>AC12.05 — Communiquer et adapter son discours</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-header">
+        <div class="comp-icon" style="background:#EDE8F5;">💻</div>
+        <div>
+          <h3>Créer des outils et applications R&T</h3>
+          <div class="comp-level">Compétence 3 — BUT 1 : S'intégrer dans un service informatique</div>
+        </div>
+      </div>
+      <div class="progress-bar-wrap"><div class="progress-bar" style="width:70%"></div></div>
+      <div class="comp-body">
+        <ul>
+          <li>AC13.01 — Utiliser un système informatique et ses outils</li>
+          <li>AC13.02 — Lire, exécuter, corriger et modifier un programme</li>
+          <li>AC13.03 — Traduire un algorithme dans un langage donné</li>
+          <li>AC13.04 — Connaître l'architecture d'un site Web</li>
+          <li>AC13.05 — Choisir les mécanismes de gestion de données</li>
+          <li>AC13.06 — S'intégrer dans un environnement collaboratif (Git)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:2rem;">
+    <div style="font-size:0.85rem;color:var(--muted);margin-bottom:1rem;font-weight:600;">Compétences professionnelles (issues du BTS SN)</div>
+    <div class="tag-list">
+      <span class="tag accent">Rédiger un cahier des charges</span>
+      <span class="tag accent">Analyser un programme informatique</span>
+      <span class="tag accent">Architecture SI</span>
+      <span class="tag accent">Méthodes Agiles SCRUM</span>
+      <span class="tag accent">Déploiement en environnement virtualisé</span>
+      <span class="tag accent">Gestion de code source Git</span>
+      <span class="tag accent">Scripts d'automatisation</span>
+      <span class="tag accent">Administration BDD relationnelle</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EXPÉRIENCES -->
+<section id="experience" class="section">
+  <div class="section-label">Parcours professionnel</div>
+  <h2 class="section-title">Expériences & Formations</h2>
+  <p class="section-lead">Mon parcours avant et pendant le BUT R&T.</p>
+
+  <div class="xp-list">
+    <div class="xp-card">
+      <div class="xp-dot-col"><div class="xp-dot"></div><div class="xp-line"></div></div>
+      <div>
+        <div class="xp-date">Avril 2024 — Août 2025</div>
+        <h3>Employé polyvalent</h3>
+        <div class="xp-company">Burger King</div>
+        <ul>
+          <li>Cuisine et préparation des commandes</li>
+          <li>Participation à l'ouverture/fermeture du restaurant</li>
+          <li>Plonge et maintien de l'équipement du restaurant</li>
+          <li>Charge de livraison</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="xp-card">
+      <div class="xp-dot-col"><div class="xp-dot"></div><div class="xp-line"></div></div>
+      <div>
+        <div class="xp-date">Mai 2022 — Juillet 2022</div>
+        <h3>Stage — Technicien maintenance informatique</h3>
+        <div class="xp-company">Qualtech IFBM</div>
+        <ul>
+          <li>Installation et configuration d'un poste informatique</li>
+          <li>Assistance &amp; support aux utilisateurs</li>
+          <li>Inventaire et suivi du parc informatique</li>
+          <li>Résolution de problèmes et veille technologique</li>
+          <li>Contribution aux différents projets informatiques</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:2.5rem">
+    <div class="section-label" style="margin-bottom:1rem">Formations</div>
+    <div class="formation-grid">
+      <div class="formation-card">
+        <div class="f-year">Depuis sept. 2025</div>
+        <h3>BUT Réseaux et Télécommunications</h3>
+        <p>Université de Haute Alsace — IUT Colmar</p>
+      </div>
+      <div class="formation-card">
+        <div class="f-year">Mars 2024</div>
+        <h3>HACCP</h3>
+        <p>Leader Academy Technôpole, Mulhouse</p>
+      </div>
+      <div class="formation-card">
+        <div class="f-year">2021 — 2023</div>
+        <h3>BTS Système Numérique option A</h3>
+        <p>Informatique et Réseau — Lycée Charles de Foucauld, Nancy</p>
+      </div>
+      <div class="formation-card">
+        <div class="f-year">2019 — 2021</div>
+        <h3>Bac Général — Maths, Physique-Chimie</h3>
+        <p>Option 1ère Sciences de l'Ingénieur — Lycée Henri Loritz, Nancy</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SAE -->
+<section id="sae" class="section">
+  <div class="section-label">Situations d'Apprentissage et d'Évaluation</div>
+  <h2 class="section-title">Mes SAÉ</h2>
+  <p class="section-lead">Documentation de mes SAÉ avec contexte, livrables, compétences mobilisées et preuves.</p>
+
+  <div class="sae-list">
+
+    <div class="sae-card">
+      <div class="sae-sidebar">SAÉ 104</div>
+      <div class="sae-content">
+        <div class="sae-meta">
+          <span class="sae-tag semester">Semestre 1</span>
+          <span class="sae-tag done">✓ Réalisée</span>
+        </div>
+        <h3>SAÉ 104 — Découverte du web et création d'un site</h3>
+        <p>Conception et déploiement d'un site web dans le cadre de la SAÉ 104. Ce projet m'a permis de mettre en pratique mes connaissances en HTML/CSS et JavaScript, en produisant un site fonctionnel hébergé sur GitHub Pages. Réalisé en intégrant les principes fondamentaux de l'architecture web et les bonnes pratiques du développement front-end.</p>
+
+        <div class="sae-grid">
+          <div class="sae-box">
+            <h4>Outils utilisés</h4>
+            <p>HTML / CSS / JavaScript, VS Code, Git, GitHub Pages</p>
+          </div>
+          <div class="sae-box">
+            <h4>Livrable produit</h4>
+            <p>Site web fonctionnel hébergé et accessible en ligne via GitHub Pages</p>
+          </div>
+          <div class="sae-box">
+            <h4>Résultat</h4>
+            <p>Site déployé et consultable publiquement — lien actif</p>
+          </div>
+        </div>
+
+        <div class="comp-pills">
+          <span class="comp-pill">AC13.04 — Architecture site Web</span>
+          <span class="comp-pill">AC13.01 — Outils informatiques</span>
+          <span class="comp-pill">AC13.06 — Environnement collaboratif Git</span>
+        </div>
+
+        <div class="proof-zone">
+          🌐 <span><strong>Preuve en ligne :</strong> <a href="https://0ppa-art.github.io/SAE_104/index.html" target="_blank" class="proof-link">0ppa-art.github.io/SAE_104/index.html</a> · Code source : <a href="https://github.com/0PPA-art" target="_blank" class="proof-link">github.com/0PPA-art</a></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sae-card">
+      <div class="sae-sidebar">SAÉ 2</div>
+      <div class="sae-content">
+        <div class="sae-meta">
+          <span class="sae-tag semester">Semestre 1</span>
+        </div>
+        <h3>[Titre de la SAÉ à renseigner]</h3>
+        <p>[Décrivez ici le contexte et les objectifs de la SAÉ : qu'est-ce qui était demandé ? Quelle était la problématique ? Quel était l'environnement de travail ? Ex : configuration d'un réseau local avec Cisco Packet Tracer, déploiement d'un service réseau, script d'automatisation…]</p>
+
+        <div class="sae-grid">
+          <div class="sae-box">
+            <h4>Outils utilisés</h4>
+            <p>[Ex : Cisco Packet Tracer, Linux, GNS3, Python…]</p>
+          </div>
+          <div class="sae-box">
+            <h4>Livrable produit</h4>
+            <p>[Ex : configuration réseau, documentation technique, script…]</p>
+          </div>
+          <div class="sae-box">
+            <h4>Résultat</h4>
+            <p>[Ex : infrastructure fonctionnelle, note obtenue…]</p>
+          </div>
+        </div>
+
+        <div class="comp-pills">
+          <span class="comp-pill">AC11.03 — Config réseau local</span>
+          <span class="comp-pill">[Ajouter d'autres AC…]</span>
+        </div>
+
+        <div class="proof-zone">
+          📎 <span><strong>Preuves &amp; traces :</strong> [Ajoutez ici un lien GitHub, capture d'écran, schéma réseau, extrait de code, démo vidéo, etc.]</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- JOURNAL -->
+<section id="journal" class="section">
+  <div class="section-label">Traces d'apprentissage</div>
+  <h2 class="section-title">Journal de bord</h2>
+  <p class="section-lead">Documentation progressive de mon travail, des difficultés rencontrées et des solutions trouvées au fil des semaines.</p>
+
+  <div class="journal-grid">
+    <div class="journal-entry">
+      <div class="journal-date">Semaine — [Date]</div>
+      <h3>[Titre de la séance / TP / activité]</h3>
+      <p>[Décrivez ce qui a été réalisé : quelle tâche, quelle notion abordée, ce que vous avez fait concrètement.]</p>
+      <div class="difficulty">⚠️ <strong>Difficulté :</strong> [Quelle difficulté avez-vous rencontrée ?]</div>
+      <div class="solution">✅ <strong>Solution :</strong> [Comment l'avez-vous résolue ?]</div>
+    </div>
+
+    <div class="journal-entry">
+      <div class="journal-date">Semaine — [Date]</div>
+      <h3>[Titre de la séance / TP / activité]</h3>
+      <p>[Décrivez ce qui a été réalisé. Mentionnez aussi ce qui vous a surpris, intéressé ou posé problème.]</p>
+      <div class="difficulty">⚠️ <strong>Difficulté :</strong> [...]</div>
+      <div class="solution">✅ <strong>Solution :</strong> [...]</div>
+    </div>
+
+    <div class="journal-entry">
+      <div class="journal-date">Semaine — [Date]</div>
+      <h3>[Titre de la séance / TP / activité]</h3>
+      <p>[Ajoutez régulièrement des entrées. Incluez des captures d'écran, photos ou schémas si possible pour illustrer votre travail.]</p>
+      <div class="difficulty">⚠️ <strong>Difficulté :</strong> [...]</div>
+      <div class="solution">✅ <strong>Solution :</strong> [...]</div>
+    </div>
+
+    <div class="journal-entry">
+      <div class="journal-date">Semaine — [Date]</div>
+      <h3>[Titre de la séance / TP / activité]</h3>
+      <p>[Notez aussi vos réflexions sur votre apprentissage : est-ce que vous progressez ? Qu'est-ce qui vous motive ? Qu'est-ce qui vous pose problème ?]</p>
+      <div class="difficulty">⚠️ <strong>Difficulté :</strong> [...]</div>
+      <div class="solution">✅ <strong>Solution :</strong> [...]</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- RÉFLEXION -->
+<section id="reflexion" class="section">
+  <div class="section-label">Bilan réflexif</div>
+  <h2 class="section-title">Retour d'expérience</h2>
+  <p class="section-lead">Ce que j'ai appris, ce que je referais autrement, et mes perspectives pour la suite du BUT.</p>
+
+  <div class="reflexion-block">
+    <div>
+      <h3>Ce que j'ai appris</h3>
+      <p>Issu d'un BTS SN option IR, j'aborde le BUT R&T avec des bases solides en programmation, en administration système et en réseaux Cisco. Ce semestre m'a permis de consolider ces acquis tout en découvrant de nouvelles problématiques propres aux télécommunications.</p>
+      <div class="quote-block">
+        « La rigueur apprise en BTS devient un vrai atout en BUT : chaque configuration, chaque script demande la même attention aux détails. »
+      </div>
+      <ul>
+        <li>Mise en pratique des protocoles réseau dans un cadre académique structuré</li>
+        <li>Développement d'une page web complète hébergée (SAÉ 104)</li>
+        <li>Travail en équipe avec gestion de version Git</li>
+        <li>[Ajoutez vos autres apprentissages clés du semestre]</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Ce que je referais autrement</h3>
+      <p>[Analysez vos points d'amélioration : qu'est-ce qui n'a pas fonctionné comme prévu ? Quelle organisation, méthode ou approche aurait été plus efficace ? Cette réflexion critique distingue un portfolio de qualité.]</p>
+      <br>
+      <h3>Objectifs et perspectives</h3>
+      <p>Mon objectif principal est de m'engager dans l'Armée de l'Air et de l'Espace, où les compétences en réseaux, cybersécurité et systèmes numériques sont directement valorisées. Le BUT R&T me donne les bases techniques et méthodologiques pour y accéder.</p>
+      <p>[Quelles compétences souhaitez-vous renforcer au prochain semestre ? Quel type de stage ou d'alternance visez-vous ?]</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ÉVALUATION -->
+<section class="section">
+  <div class="section-label">Auto-évaluation</div>
+  <h2 class="section-title">Grille d'évaluation du portfolio</h2>
+  <p class="section-lead">Grille issue des consignes officielles — positionnez-vous honnêtement par rapport à ces critères.</p>
+
+  <table class="eval-table">
+    <thead>
+      <tr>
+        <th>Critère</th>
+        <th>Niv. 1 — Insuffisant</th>
+        <th>Niv. 2 — À améliorer</th>
+        <th>Niv. 3 — Satisfaisant</th>
+        <th>Niv. 4 — Très bon</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Structure du portfolio</td>
+        <td class="level-1">Absente ou très désorganisée</td>
+        <td class="level-2">Organisation confuse ou incomplète</td>
+        <td class="level-3">Organisation claire mais perfectible</td>
+        <td class="level-4">Organisation très claire, navigation fluide</td>
+      </tr>
+      <tr>
+        <td>Contenu réflexif</td>
+        <td class="level-1">Absent ou très superficiel</td>
+        <td class="level-2">Réflexion limitée ou peu personnelle</td>
+        <td class="level-3">Réflexion personnelle présente, parfois pertinente</td>
+        <td class="level-4">Réflexion approfondie, personnelle et bien argumentée</td>
+      </tr>
+      <tr>
+        <td>Présentation des compétences</td>
+        <td class="level-1">Compétences non identifiées ou mal présentées</td>
+        <td class="level-2">Compétences identifiées mais peu illustrées</td>
+        <td class="level-3">Compétences bien identifiées et illustrées</td>
+        <td class="level-4">Compétences clairement présentées avec des preuves pertinentes</td>
+      </tr>
+      <tr>
+        <td>Illustrations / preuves</td>
+        <td class="level-1">Aucune illustration ou hors sujet</td>
+        <td class="level-2">Quelques preuves peu pertinentes</td>
+        <td class="level-3">Preuves pertinentes et bien intégrées</td>
+        <td class="level-4">Preuves variées, riches et bien mises en valeur</td>
+      </tr>
+      <tr>
+        <td>Qualité de l'expression écrite</td>
+        <td class="level-1">Nombreuses fautes, langage familier</td>
+        <td class="level-2">Fautes fréquentes, manque de clarté</td>
+        <td class="level-3">Bonne maîtrise globale, quelques maladresses</td>
+        <td class="level-4">Langue soignée, style clair et fluide</td>
+      </tr>
+      <tr>
+        <td>Aspect visuel / esthétique</td>
+        <td class="level-1">Portfolio peu lisible ou brouillon</td>
+        <td class="level-2">Design basique ou peu engageant</td>
+        <td class="level-3">Design lisible et agréable</td>
+        <td class="level-4">Esthétique soignée, cohérente et valorisante</td>
+      </tr>
+      <tr>
+        <td>Respect des consignes</td>
+        <td class="level-1">Plusieurs consignes non respectées</td>
+        <td class="level-2">Quelques oublis ou écarts</td>
+        <td class="level-3">Consignes globalement respectées</td>
+        <td class="level-4">Toutes les consignes respectées avec rigueur</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <p>E-Portfolio de Sichard Lommé · BUT R&T IUT Colmar · <a href="https://github.com/0PPA-art" target="_blank">github.com/0PPA-art</a> · <a href="https://0ppa-art.github.io/SAE_104/index.html" target="_blank">SAE_104</a> · 2025</p>
+</footer>
+
+</body>
+</html>
