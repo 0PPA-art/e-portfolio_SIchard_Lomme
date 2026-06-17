@@ -440,17 +440,17 @@
 	  <h4>.........AC13.05 — Gestion de données Json </h3>
 			<img src="image/preuve2.png" style="width:50%; border-radius:8px;">
 			<p><em>Creation_Boutons.py</em></p>
-			<p>#crée un fichier json pour obtenir un aperçus du scripte analyse
-$jsonPath = Join-Path -Path $scriptDir -ChildPath "gros_fichiers.json"
+			<p>#crée un fichier json pour obtenir un aperçus du scripte analyse</p>
+			<p>$jsonPath = Join-Path -Path $scriptDir -ChildPath "gros_fichiers.json"</p>
 
-if (Test-Path $jsonPath -PathType Leaf) {
-    Write-Host "gros_fichiers.json cree"
-    # partie interface
-    $interfaceScript = Join-Path -Path $scriptDir -ChildPath "scripte3.py"
-    & $python $interfaceScript
-} else {
-    Write-Host "gros_fichiers.json impossible cree"
-}</p>  
+			<p>if (Test-Path $jsonPath -PathType Leaf) {</p>
+    				<p>Write-Host "gros_fichiers.json cree"</p>
+   <p> # partie interface</p>
+   <p> $interfaceScript = Join-Path -Path $scriptDir -ChildPath "scripte3.py"</p>
+   <p> & $python $interfaceScript</p>
+<p>} else {</p>
+  <p>  Write-Host "gros_fichiers.json impossible cree"</p>
+<p>}</p>  
 	  </div>
 		
 		  
