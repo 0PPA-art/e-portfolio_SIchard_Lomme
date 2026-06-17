@@ -580,32 +580,32 @@
       <div class="journal-date">22/05/2026</div>
       <h3>TP Validation — DHCP sur commutateur Cisco</h3>
       <p>Séance de TP de type validation : dépannage d'un système réseau avec configuration d'un DHCP sur un commutateur Cisco. Exercice réalisé en conditions de contrôle, sans documentation autorisée.</p>
-      <div class="difficulty">⚠️ <strong>Difficulté :</strong> Absence de notes personnelles lors du TP + oubli de la commande <code>(config)#ip dhcp pool</code> qui bloque toute la configuration.</div>
-      <div class="solution">✅ <strong>Solution :</strong> Pas de résolution lors du TP. Leçon retenue : toujours préparer une fiche récapitulative des commandes Cisco et la garder à portée.</div>
+      <div class="difficulty"> <strong>Difficulté :</strong> Absence de notes personnelles lors du TP + oubli de la commande <code>(config)#ip dhcp pool</code> qui bloque toute la configuration.</div>
+      <div class="solution"><strong>Solution :</strong> Pas de résolution lors du TP. Leçon retenue : toujours préparer une fiche récapitulative des commandes Cisco et la garder à portée.</div>
     </div>
 
     <div class="journal-entry">
       <div class="journal-date">R2.08 — TP1</div>
       <h3>POO Python — Modélisation d'une concession automobile</h3>
       <p>Premier TP de programmation orientée objet : création des classes <code>Voiture</code>, <code>Garage</code> et <code>Concession</code> avec persistance des données en JSON. Première approche de la structure multi-fichiers en Python.</p>
-      <div class="difficulty">⚠️ <strong>Difficulté :</strong> Erreurs d'import entre les fichiers (<code>concession.py</code> importait <code>garage.py</code> qui importait <code>obj_voitures.py</code>) — le moindre import circulaire faisait planter le programme.</div>
-      <div class="solution">✅ <strong>Solution :</strong> Schéma papier des dépendances entre classes avant de coder. Réorganisation des imports en suivant le principe : les classes "feuilles" (sans dépendance) en premier, les agrégateurs en dernier.</div>
+      <div class="difficulty"> <strong>Difficulté :</strong> Erreurs d'import entre les fichiers (<code>concession.py</code> importait <code>garage.py</code> qui importait <code>obj_voitures.py</code>) — le moindre import circulaire faisait planter le programme.</div>
+      <div class="solution"> <strong>Solution :</strong> Schéma papier des dépendances entre classes avant de coder. Réorganisation des imports en suivant le principe : les classes "feuilles" (sans dépendance) en premier, les agrégateurs en dernier.</div>
     </div>
 
     <div class="journal-entry">
       <div class="journal-date">R2.08 — TP3</div>
       <h3>POO Python — Héritage &amp; traitement de fichiers texte</h3>
       <p>TP3 avec deux volets : implémentation de la classe <code>Animal</code> avec héritage, et script <code>extract_verb.py</code> pour extraire les verbes d'un fichier texte. Combinaison de POO et manipulation de fichiers.</p>
-      <div class="difficulty">⚠️ <strong>Difficulté :</strong> La surcharge de méthodes (<code>__str__</code>, <code>__repr__</code>) dans les sous-classes écrasait le comportement parent de façon inattendue, causant des sorties incorrectes lors des tests.</div>
-      <div class="solution">✅ <strong>Solution :</strong> Utilisation de <code>super().__init__()</code> et <code>super().methode()</code> pour appeler explicitement le comportement parent avant d'ajouter le comportement spécifique à la sous-classe.</div>
+      <div class="difficulty"> <strong>Difficulté :</strong> La surcharge de méthodes (<code>__str__</code>, <code>__repr__</code>) dans les sous-classes écrasait le comportement parent de façon inattendue, causant des sorties incorrectes lors des tests.</div>
+      <div class="solution"> <strong>Solution :</strong> Utilisation de <code>super().__init__()</code> et <code>super().methode()</code> pour appeler explicitement le comportement parent avant d'ajouter le comportement spécifique à la sous-classe.</div>
     </div>
 
     <div class="journal-entry">
       <div class="journal-date">R2.09 — Projet</div>
       <h3>Web + BDD — Application bibliothèque &amp; CRUD</h3>
       <p>Développement d'une application de gestion de bibliothèque en Python avec interface web HTML/CSS et base de données SQLite. Opérations CRUD complètes sur les livres, auteurs et emprunts.</p>
-      <div class="difficulty">⚠️ <strong>Difficulté :</strong> Concaténation directe des entrées utilisateur dans les requêtes SQL — mauvaise pratique qui expose aux injections SQL. Signalé par l'enseignant lors de la correction du projet bibliothèque.</div>
-      <div class="solution">✅ <strong>Solution :</strong> Réécriture de toutes les requêtes avec des paramètres liés (<code>cursor.execute("SELECT * FROM livres WHERE id=?", (id,))</code>). Bonne pratique désormais appliquée systématiquement dans <code>dblcrud</code>.</div>
+      <div class="difficulty"> <strong>Difficulté :</strong> Concaténation directe des entrées utilisateur dans les requêtes SQL — mauvaise pratique qui expose aux injections SQL. Signalé par l'enseignant lors de la correction du projet bibliothèque.</div>
+      <div class="solution"> <strong>Solution :</strong> Réécriture de toutes les requêtes avec des paramètres liés (<code>cursor.execute("SELECT * FROM livres WHERE id=?", (id,))</code>). Bonne pratique désormais appliquée systématiquement dans <code>dblcrud</code>.</div>
     </div>
   </div>
 </section>
